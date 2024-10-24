@@ -1,21 +1,20 @@
-import { Link } from "expo-router";
+import { Link, useNavigation } from "expo-router";
+import { useEffect, useState } from "react";
 import { View, StyleSheet, Text, SafeAreaView, Image, TextInput, KeyboardAvoidingView, Button, Pressable } from "react-native"
 
-import { useState, useEffect } from "react";
-
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
+import { createUserWithEmailAndPassword } from "firebase/auth";
 import { User } from "firebase/auth";
 import { auth } from "./firebase_conf";
 
-export default function Login({navigation}) {
+export default function SignUp({navigation}) {
     const [email, changeEmail] = useState("");
     const [password, changePassword] = useState("");
     const [currentUser, updateUser] = useState<User>();
 
-    function signInUser(email: string, password: string) {
+    function signUpNewUser(email: string, password: string) {
     
         //firebase authentication
-        signInWithEmailAndPassword(auth, email, password)
+        createUserWithEmailAndPassword(auth, email, password)
             .then((userCredentials) => {
                 console.log(userCredentials.user);
                 updateUser(userCredentials.user);
@@ -27,8 +26,8 @@ export default function Login({navigation}) {
     }
 
     useEffect(() => {
-        if (currentUser || auth.currentUser) {
-            console.log("User signed in");
+        if (currentUser) {
+            console.log("User created");
             navigation.navigate("home");
         } else {
             console.log("Nothing to do");
@@ -39,8 +38,8 @@ export default function Login({navigation}) {
         <KeyboardAvoidingView style={styles.window} behavior="height">
             <Image source={require("@/assets/images/login-bg.png")} style={styles.bg_image} />
             <SafeAreaView style={styles.content}>
-                <Text style={styles.title}>Login</Text>
-                <Text style={styles.caption}>Sign in to continue</Text>
+                <Text style={styles.title}>Sign Up</Text>
+                <Text style={styles.caption}>Create new account</Text>
 
                 <View style={{ height: 32 }} />
 
@@ -49,22 +48,17 @@ export default function Login({navigation}) {
                 <Text style={styles.label}>PASSWORD</Text>
                 <TextInput style={styles.input} secureTextEntry={true} value={password} onChangeText={changePassword} />
 
-
                 <View style={{ height: 18 }} />
 
-                <Pressable style={styles.login_button} onPress={() => signInUser(email, password)}>
-                    <Text style={styles.login_button_text}>Log In</Text>
+                <Pressable style={styles.login_button} onPress={() => signUpNewUser(email, password)}>
+                    <Text style={styles.login_button_text}>Sign Up</Text>
                 </Pressable>
 
                 <View style={{ height: 24 }} />
 
-                <Pressable>
-                    <Text style={styles.caption}>Forgot Password?</Text>
-                </Pressable>
-
-                <Link href="/signup" asChild>
+                <Link href="/login" asChild>
                     <Pressable>
-                        <Text style={styles.caption}>Sign Up!</Text>
+                        <Text style={styles.caption}>Go Back</Text>
                     </Pressable>
                 </Link>
             </SafeAreaView>
