@@ -15,10 +15,10 @@ export default function Start() {
           alignItems: "center",
         }}
       >
-        <Text>Welcome!</Text>
+        <Text>Welcome!!</Text>
         <Link href="/login" asChild>
           <Pressable>
-            <ThemedText type="link">Get Started</ThemedText>
+            <ThemedText type="link">Get-Started!</ThemedText>
           </Pressable>
         </Link>
       </View>

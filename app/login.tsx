@@ -40,13 +40,13 @@ export default function Login({navigation}) {
             <Image source={require("@/assets/images/login-bg.png")} style={styles.bg_image} />
             <SafeAreaView style={styles.content}>
                 <Text style={styles.title}>Login</Text>
-                <Text style={styles.caption}>Sign in to continue</Text>
+                <Text style={styles.caption}>Sign-In-To-Continue!!</Text>
 
                 <View style={{ height: 32 }} />
 
-                <Text style={styles.label}>EMAIL</Text>
+                <Text style={styles.label}>EMAIL!</Text>
                 <TextInput style={styles.input} value={email} onChangeText={changeEmail} />
-                <Text style={styles.label}>PASSWORD</Text>
+                <Text style={styles.label}>PASSWORD!</Text>
                 <TextInput style={styles.input} secureTextEntry={true} value={password} onChangeText={changePassword} />
 
 
@@ -64,7 +64,7 @@ export default function Login({navigation}) {
 
                 <Link href="/signup" asChild>
                     <Pressable>
-                        <Text style={styles.caption}>Sign Up!</Text>
+                        <Text style={styles.caption}>Sign-Up!</Text>
                     </Pressable>
                 </Link>
             </SafeAreaView>
