@@ -1,30 +1,34 @@
-import { ThemedText } from "@/components/ThemedText";
-import { Link, Stack } from "expo-router";
-import { Button, Pressable, Text, View } from "react-native";
-import { app } from "./firebase_conf";
 import { NavigationContainer } from "@react-navigation/native";
-import { auth } from "./firebase_conf";
-import { useEffect } from "react";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import Login from "./login";
+import SignUp from "./signup";
+import Home from "./home";
+import Start from "./start";
+
+/*
+RootStackParamList strongly outlines the stack navigator.
+
+This is not necessary for the app to run, but it is good practice. 
+
+Define the types for your stack navigator
+
+export type RootStackParamList = {
+  Login: undefined;
+  SignUp: undefined;
+  Home: undefined;
+}; 
+
+const Stack = createNativeStackNavigator<RootStackParamList>();
+
+Then the rest of the code follows here.
+*/
+
+const Stack = createNativeStackNavigator();
 
 export default function Index() {
   return (
     <NavigationContainer>
-      <View
-        style={{
-          flex: 1,
-          justifyContent: "center",
-          alignItems: "center",
-        }}
-      >
-        <Text>Welcome!</Text>
-        <Link href="/login" asChild>
-          <Pressable>
-            <ThemedText type="link">Get Started</ThemedText>
-          </Pressable>
-        </Link>
-      </View>
+      <></>
     </NavigationContainer>
   );
 }
-
-

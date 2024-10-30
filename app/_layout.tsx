@@ -3,6 +3,7 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import Login from "./login";
 import SignUp from "./signup";
 import Home from "./home";
+import Start from "./start";
 
 /*
 RootStackParamList strongly outlines the stack navigator.
@@ -27,6 +28,7 @@ const Stack = createNativeStackNavigator();
 export default function RootLayout() {
   return (
       <Stack.Navigator screenOptions={{ headerShown: false }}>
+        <Stack.Screen name="start" component={Start} />
         <Stack.Screen name="login" component={Login} />
         <Stack.Screen name="signup" component={SignUp}/>
         <Stack.Screen name="home" component={Home}/>
