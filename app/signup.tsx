@@ -1,18 +1,22 @@
-import { Link, useNavigation } from "expo-router";
 import { useEffect, useState } from "react";
-import { View, StyleSheet, Text, SafeAreaView, Image, TextInput, KeyboardAvoidingView, Button, Pressable } from "react-native"
+import { View, StyleSheet, Text, Image, TextInput, KeyboardAvoidingView, Button, Pressable } from "react-native"
 
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { User } from "firebase/auth";
 import { auth } from "./firebase_conf";
+import type { NavigationProp } from ".";
+import { useNavigation } from "@react-navigation/native";
 
-export default function SignUp({navigation}) {
+
+export default function SignUp() {
     const [email, changeEmail] = useState("");
     const [password, changePassword] = useState("");
     const [currentUser, updateUser] = useState<User>();
 
+    const navigation = useNavigation<NavigationProp>();
+
     function signUpNewUser(email: string, password: string) {
-    
+
         //firebase authentication
         createUserWithEmailAndPassword(auth, email, password)
             .then((userCredentials) => {
@@ -28,7 +32,7 @@ export default function SignUp({navigation}) {
     useEffect(() => {
         if (currentUser) {
             console.log("User created");
-            navigation.navigate("home");
+            navigation.navigate("Home");
         } else {
             console.log("Nothing to do");
         }
@@ -37,7 +41,7 @@ export default function SignUp({navigation}) {
     return (
         <KeyboardAvoidingView style={styles.window} behavior="height">
             <Image source={require("@/assets/images/login-bg.png")} style={styles.bg_image} />
-            <SafeAreaView style={styles.content}>
+            <View style={styles.content}>
                 <Text style={styles.title}>Sign Up</Text>
                 <Text style={styles.caption}>Create new account</Text>
 
@@ -56,12 +60,10 @@ export default function SignUp({navigation}) {
 
                 <View style={{ height: 24 }} />
 
-                <Link href="/login" asChild>
-                    <Pressable>
-                        <Text style={styles.caption}>Go Back</Text>
-                    </Pressable>
-                </Link>
-            </SafeAreaView>
+                <Pressable onPress={() => navigation.navigate("Login")}>
+                    <Text style={styles.caption}>Go Back</Text>
+                </Pressable>
+            </View>
         </KeyboardAvoidingView>
     );
 }

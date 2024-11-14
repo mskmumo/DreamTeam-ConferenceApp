@@ -1,19 +1,21 @@
 import { Link } from "expo-router";
-import { View, StyleSheet, Text, SafeAreaView, Image, TextInput, KeyboardAvoidingView, Button, Pressable } from "react-native"
-
+import { View, StyleSheet, Text, Image, TextInput, KeyboardAvoidingView, Button, Pressable } from "react-native"
 import { useState, useEffect } from "react";
-
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
+import { signInWithEmailAndPassword } from "firebase/auth";
 import { User } from "firebase/auth";
 import { auth } from "./firebase_conf";
+import type { NavigationProp } from ".";
+import { useNavigation } from "@react-navigation/native";
 
-export default function Login({navigation}) {
+export default function Login() {
     const [email, changeEmail] = useState("");
     const [password, changePassword] = useState("");
     const [currentUser, updateUser] = useState<User>();
 
+    const navigation = useNavigation<NavigationProp>();
+
     function signInUser(email: string, password: string) {
-    
+
         //firebase authentication
         signInWithEmailAndPassword(auth, email, password)
             .then((userCredentials) => {
@@ -29,7 +31,7 @@ export default function Login({navigation}) {
     useEffect(() => {
         if (currentUser || auth.currentUser) {
             console.log("User signed in");
-            navigation.navigate("home");
+            navigation.navigate("Home");
         } else {
             console.log("Nothing to do");
         }
@@ -38,7 +40,7 @@ export default function Login({navigation}) {
     return (
         <KeyboardAvoidingView style={styles.window} behavior="height">
             <Image source={require("@/assets/images/login-bg.png")} style={styles.bg_image} />
-            <SafeAreaView style={styles.content}>
+            <View style={styles.content}>
                 <Text style={styles.title}>Login</Text>
                 <Text style={styles.caption}>Sign-In-To-Continue!!</Text>
 
@@ -62,12 +64,10 @@ export default function Login({navigation}) {
                     <Text style={styles.caption}>Forgot Password?</Text>
                 </Pressable>
 
-                <Link href="/signup" asChild>
-                    <Pressable>
-                        <Text style={styles.caption}>Sign-Up!</Text>
-                    </Pressable>
-                </Link>
-            </SafeAreaView>
+                <Pressable onPress={() => navigation.navigate("SignUp")}>
+                    <Text style={styles.caption}>Sign-Up!</Text>
+                </Pressable>
+            </View>
         </KeyboardAvoidingView>
     );
 }

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { SafeAreaView, View, Text, StyleSheet, Pressable } from "react-native";
+import { View, Text, StyleSheet, Pressable } from "react-native";
 import { Ionicons } from "@expo/vector-icons"; // For icons
 import Greeting from "./Greeting";
 import Carousel from "./Carousel";
@@ -20,7 +20,7 @@ export default function HomeScreen() {
   }, []);
 
   return (
-    <SafeAreaView style={styles.container}>
+    <View style={styles.container}>
       {/* Greeting Section */}
       <Greeting greeting={greeting} userName={user.name} />
 
@@ -34,8 +34,8 @@ export default function HomeScreen() {
       <BottomNavigationBar />
 
       {/* Calendar */}
-    
-    </SafeAreaView>
+
+    </View>
   );
 }
 

@@ -1,34 +1,29 @@
-import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import Login from "./login";
 import SignUp from "./signup";
 import Home from "./home";
 import Start from "./start";
 
-/*
-RootStackParamList strongly outlines the stack navigator.
+import type { NativeStackNavigationProp } from "@react-navigation/native-stack/lib/typescript/commonjs/src/types";
 
-This is not necessary for the app to run, but it is good practice. 
-
-Define the types for your stack navigator
-
-export type RootStackParamList = {
+type RootStackParamList = {
+  Start: undefined,
   Login: undefined;
   SignUp: undefined;
   Home: undefined;
-}; 
+};
+
+export type NavigationProp = NativeStackNavigationProp<RootStackParamList>;
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
-Then the rest of the code follows here.
-*/
-
-const Stack = createNativeStackNavigator();
-
 export default function Index() {
   return (
-    <NavigationContainer>
-      <></>
-    </NavigationContainer>
+    <Stack.Navigator screenOptions={{ headerShown: false, headerTransparent: true} }>
+      <Stack.Screen name="Start" component={Start} />
+      <Stack.Screen name="Login" component={Login} />
+      <Stack.Screen name="SignUp" component={SignUp} />
+      <Stack.Screen name="Home" component={Home} />
+    </Stack.Navigator>
   );
 }
