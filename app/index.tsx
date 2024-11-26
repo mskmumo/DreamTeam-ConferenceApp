@@ -19,7 +19,7 @@ const Stack = createNativeStackNavigator<RootStackParamList>();
 
 export default function Index() {
   return (
-    <Stack.Navigator screenOptions={{ headerShown: false, headerTransparent: true} }>
+    <Stack.Navigator screenOptions={{ headerShown: false, headerTransparent: true, gestureEnabled: false} }>
       <Stack.Screen name="Start" component={Start} />
       <Stack.Screen name="Login" component={Login} />
       <Stack.Screen name="SignUp" component={SignUp} />

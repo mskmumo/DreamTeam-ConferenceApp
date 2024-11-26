@@ -1,4 +1,3 @@
-import { Link } from "expo-router";
 import { View, StyleSheet, Text, Image, TextInput, KeyboardAvoidingView, Button, Pressable } from "react-native"
 import { useState, useEffect } from "react";
 import { signInWithEmailAndPassword } from "firebase/auth";
@@ -6,11 +5,22 @@ import { User } from "firebase/auth";
 import { auth } from "./firebase_conf";
 import type { NavigationProp } from ".";
 import { useNavigation } from "@react-navigation/native";
+import { Snackbar } from "react-native-paper";
 
 export default function Login() {
     const [email, changeEmail] = useState("");
     const [password, changePassword] = useState("");
     const [currentUser, updateUser] = useState<User>();
+
+    const [snackbarVisible, setSnackbarVisible] = useState(false);
+
+    function showSnackbar() {
+        setSnackbarVisible(true);
+    }
+
+    function dismissSnackbar() {
+        setSnackbarVisible(false);
+    }
 
     const navigation = useNavigation<NavigationProp>();
 
@@ -24,6 +34,7 @@ export default function Login() {
             })
             .catch((error) => {
                 console.log(error);
+                showSnackbar();
                 updateUser(undefined);
             })
     }
@@ -67,6 +78,9 @@ export default function Login() {
                 <Pressable onPress={() => navigation.navigate("SignUp")}>
                     <Text style={styles.caption}>Sign-Up!</Text>
                 </Pressable>
+                <Snackbar visible={snackbarVisible} onDismiss={dismissSnackbar} duration={5000}>
+                    Incorrect login details!
+                </Snackbar>
             </View>
         </KeyboardAvoidingView>
     );

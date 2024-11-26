@@ -6,12 +6,23 @@ import { User } from "firebase/auth";
 import { auth } from "./firebase_conf";
 import type { NavigationProp } from ".";
 import { useNavigation } from "@react-navigation/native";
+import { Snackbar } from "react-native-paper";
 
 
 export default function SignUp() {
     const [email, changeEmail] = useState("");
     const [password, changePassword] = useState("");
     const [currentUser, updateUser] = useState<User>();
+
+    const [snackbarVisible, setSnackbarVisible] = useState(false);
+
+    function showSnackbar() {
+        setSnackbarVisible(true);
+    }
+
+    function dismissSnackbar() {
+        setSnackbarVisible(false);
+    }
 
     const navigation = useNavigation<NavigationProp>();
 
@@ -63,6 +74,9 @@ export default function SignUp() {
                 <Pressable onPress={() => navigation.navigate("Login")}>
                     <Text style={styles.caption}>Go Back</Text>
                 </Pressable>
+                <Snackbar visible={snackbarVisible} onDismiss={dismissSnackbar} duration={5000}>
+                    Error creating new user!
+                </Snackbar>
             </View>
         </KeyboardAvoidingView>
     );
