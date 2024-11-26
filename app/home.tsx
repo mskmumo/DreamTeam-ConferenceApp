@@ -4,8 +4,6 @@ import { Ionicons } from "@expo/vector-icons"; // For icons
 import Greeting from "./Greeting";
 import Carousel from "./Carousel";
 import HamburgerMenu from "./HamburgerMenu";
-import BottomNavigationBar from "./BottomNavigationBar";
-
 
 export default function HomeScreen() {
   const [user, setUser] = useState({ name: "John" }); // Example user data
@@ -29,11 +27,6 @@ export default function HomeScreen() {
 
       {/* Hamburger Menu */}
       <HamburgerMenu />
-
-      {/* Bottom Navigation Bar */}
-      <BottomNavigationBar />
-
-      {/* Calendar */}
 
     </View>
   );
