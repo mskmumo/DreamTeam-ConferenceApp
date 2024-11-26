@@ -42,7 +42,7 @@ export default function Login() {
     useEffect(() => {
         if (currentUser || auth.currentUser) {
             console.log("User signed in");
-            navigation.navigate("Home");
+            navigation.navigate("App");
         } else {
             console.log("Nothing to do");
         }

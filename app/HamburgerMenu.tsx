@@ -1,6 +1,10 @@
 import React, { useState } from "react";
 import { View, Pressable, Text, StyleSheet, Modal } from "react-native";
 import { Ionicons } from "@expo/vector-icons"; // Icons for the menu
+import { signOut } from "firebase/auth";
+import { auth } from "./firebase_conf";
+import { NavigationProp } from ".";
+import { useNavigation } from "@react-navigation/native";
 
 export default function HamburgerMenu() {
   const [menuVisible, setMenuVisible] = useState(false);
@@ -8,6 +12,16 @@ export default function HamburgerMenu() {
   const toggleMenu = () => {
     setMenuVisible(!menuVisible);
   };
+
+  const navigation = useNavigation<NavigationProp>();
+
+  function logout() {
+    signOut(auth)
+      .then((value) => {
+        navigation.navigate("Login");
+        setMenuVisible(false);
+      });
+  }
 
   return (
     <View style={styles.menuContainer}>
@@ -42,7 +56,7 @@ export default function HamburgerMenu() {
                 <Text style={styles.menuItemText}>Select Language</Text>
               </Pressable>
               <Pressable
-                onPress={() => alert("Logging out...")}
+                onPress={() => logout()}
                 style={({ pressed }) => [
                   styles.menuItem,
                   pressed && styles.pressedItem,

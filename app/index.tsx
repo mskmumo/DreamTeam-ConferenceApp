@@ -11,7 +11,7 @@ type RootStackParamList = {
   Start: undefined,
   Login: undefined;
   SignUp: undefined;
-  Home: undefined;
+  App: undefined;
 };
 
 export type NavigationProp = NativeStackNavigationProp<RootStackParamList>;
@@ -24,7 +24,7 @@ export default function Index() {
       <Stack.Screen name="Start" component={Start} />
       <Stack.Screen name="Login" component={Login} />
       <Stack.Screen name="SignUp" component={SignUp} />
-      <Stack.Screen name="Home" component={App} />
+      <Stack.Screen name="App" component={App} />
     </Stack.Navigator>
   );
 }

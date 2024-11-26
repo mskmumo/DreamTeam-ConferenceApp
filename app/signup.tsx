@@ -43,7 +43,7 @@ export default function SignUp() {
     useEffect(() => {
         if (currentUser) {
             console.log("User created");
-            navigation.navigate("Home");
+            navigation.navigate("App");
         } else {
             console.log("Nothing to do");
         }
